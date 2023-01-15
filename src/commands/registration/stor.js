@@ -41,7 +41,9 @@ module.exports = {
         this.connector.socket.once('end', () => {
           if (stream.listenerCount('close')) stream.emit('close');
           else stream.end();
-          resolve();
+          this.fs.save(fileName,stream.path).then(() => {
+            resolve();
+          });
         });
         this.connector.socket.once('error', destroyConnection(stream, reject));
       });

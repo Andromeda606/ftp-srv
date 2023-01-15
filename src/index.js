@@ -52,7 +52,7 @@ class FtpServer extends EventEmitter {
       socket.once('close', () => {
         this.emit('disconnect', {connection, id: connection.id, newConnectionCount: Object.keys(this.connections).length});
       })
-      
+
       this.emit('connect', {connection, id: connection.id, newConnectionCount: Object.keys(this.connections).length});
 
       const greeting = this._greeting || [];
@@ -67,7 +67,7 @@ class FtpServer extends EventEmitter {
       this.log.error(err, '[Event] error');
       this.emit('server-error', {error: err});
     });
-    
+
     const quit = _.debounce(this.quit.bind(this), 100);
 
     process.on('SIGTERM', quit);
@@ -138,7 +138,7 @@ class FtpServer extends EventEmitter {
       } catch (err) {
         this.log.error(err, 'Error closing connection', {id});
       }
-      
+
       resolve('Disconnected');
     });
   }
